@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>付き合って1年、おめでとう</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+<style>
+:root{
+  --sky1:#bfe6ff;--sky2:#ffe3d3;--ink:#3a2a4a;--card:#ffffffd9;--muted:#6b5a7b;--accent:#ff6f7d;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--sky1:#2b2a5c;--sky2:#5a3350;--ink:#fff3ee;--card:#2a1f3dd9;--muted:#d9c7e6}
+}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;color:var(--ink);
+  background:linear-gradient(180deg,var(--sky1),var(--sky2));background-attachment:fixed;overflow-x:hidden}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:30}
+#veil{position:fixed;inset:0;background:#160c3a;opacity:0;transition:opacity .6s;pointer-events:none;z-index:25}
+#veil.on{opacity:.72}
+#balloons{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:5}
+.balloon{position:absolute;bottom:-160px;width:64px;height:78px;border-radius:50% 50% 48% 48%/58% 58% 42% 42%;
+  pointer-events:auto;cursor:pointer;animation:rise linear forwards;box-shadow:inset -8px -10px 0 #0000001a,inset 8px 8px 0 #ffffff55}
+.balloon::before{content:"";position:absolute;left:50%;bottom:-6px;width:10px;height:10px;background:inherit;transform:translateX(-50%) rotate(45deg);filter:brightness(.9)}
+.balloon::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:70px;background:#ffffffaa;transform-origin:top;animation:sway 2.4s ease-in-out infinite alternate}
+@keyframes rise{to{transform:translateY(calc(-100vh - 320px))}}
+@keyframes sway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+
+/* gate */
+#gate{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center;padding:24px;
+  background:linear-gradient(180deg,var(--sky1),var(--sky2));transition:opacity .8s,transform .8s}
+#gate.gone{opacity:0;transform:scale(1.08);pointer-events:none}
+.gift{font-size:96px;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-12px) rotate(4deg)}}
+#gate p{margin:0;font-size:18px;color:var(--muted)}
+button{font:inherit;cursor:pointer}
+.open{border:0;border-radius:999px;padding:16px 40px;font-size:20px;font-weight:900;color:#fff;background:var(--accent);box-shadow:0 8px 0 #c9475a;transition:transform .1s,box-shadow .1s}
+.open:active{transform:translateY(6px);box-shadow:0 2px 0 #c9475a}
+button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+main{position:relative;z-index:10;max-width:760px;margin:0 auto;padding:48px 20px 90px;display:flex;flex-direction:column;gap:56px}
+.hero{text-align:center;padding-top:6vh}
+.hero .num{font-size:clamp(120px,34vw,220px);font-weight:900;line-height:.9;color:var(--accent);margin:0;
+  text-shadow:6px 6px 0 #fff,10px 10px 0 #ffb3ba}
+.hero h1{margin:8px 0 0;font-size:clamp(26px,6.5vw,44px);font-weight:900;letter-spacing:.04em}
+.hero .names{margin-top:14px;font-size:20px;color:var(--muted)}
+.panel{background:var(--card);border-radius:28px;padding:28px 24px;backdrop-filter:blur(6px);box-shadow:0 10px 30px #3a2a4a22}
+.days{text-align:center}
+.days b{display:block;font-size:clamp(48px,14vw,84px);color:var(--accent);line-height:1.1;font-variant-numeric:tabular-nums}
+.days span{color:var(--muted)}
+h2{margin:0 0 16px;font-size:24px;font-weight:900;text-align:center}
+.letter{line-height:2;font-size:17px}
+.letter p{margin:0 0 1em}
+.reasons{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.reason{border:0;border-radius:22px;min-height:110px;padding:14px;font-size:16px;font-weight:700;color:#3a2a4a;perspective:600px;transition:transform .2s}
+.reason:hover{transform:rotate(-2deg) scale(1.03)}
+.reason:nth-child(1){background:#ffd6dc}.reason:nth-child(2){background:#fff1b8}.reason:nth-child(3){background:#c9f0dd}
+.reason:nth-child(4){background:#cfe6ff}.reason:nth-child(5){background:#e6d7ff}.reason:nth-child(6){background:#ffe0c2}
+.reason.on{animation:flip .5s}
+@keyframes flip{from{transform:rotateY(90deg)}to{transform:rotateY(0)}}
+.actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn{border:0;border-radius:999px;padding:14px 26px;font-weight:900;font-size:16px;color:#fff;background:var(--ink)}
+.btn.alt{background:var(--accent)}
+#more{background:#fff;color:#1e6fe0}
+details{text-align:center;color:var(--muted)}
+summary{cursor:pointer;font-weight:700}
+.set{display:grid;gap:10px;margin-top:14px;text-align:left}
+.set label{display:grid;gap:4px;font-size:14px}
+.set input{font:inherit;padding:10px 12px;border-radius:12px;border:2px solid #b9a8c9;background:#fff;color:#3a2a4a}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="veil"></div>
+<canvas id="fx"></canvas>
+<div id="balloons" aria-hidden="true"></div>
+
+<div id="gate">
+  <div class="gift" aria-hidden="true">🎁</div>
+  <p>ななにプレゼントがあります</p>
+  <button class="open" id="openBtn">開けてみる</button>
+</div>
+
+<main>
+  <section class="hero">
+    <p class="num">1<small style="font-size:.32em;text-shadow:none;margin-left:.1em">年</small></p>
+    <h1>付き合って1年、おめでとう！</h1>
+    <div class="names" id="names"></div>
+  </section>
+
+  <section class="panel days">
+    <span>付き合ってから、いっしょに過ごした日</span>
+    <b id="dayCount2">0</b>
+    <span>日</span>
+  </section>
+
+  <section class="panel days">
+    <span>出会ってから、いっしょに過ごした日</span>
+    <b id="dayCount">0</b>
+    <span>日</span>
+  </section>
+
+  <section class="panel">
+    <h2>1年分の「ありがとう」</h2>
+    <div class="letter">
+      <p>いつも一緒にいてくれて、ありがとう。</p>
+      <p>うれしい日も、疲れた日も、ななと話すととても回復します。この1年で、ぼくの毎日はずっと楽しくなりました。</p>
+      <p>これからも、笑ったり、ゲームしたり、動画見たりしながら、ゆっくり2年目を歩いていこうね。</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>好きなところ（一部）（タップしてね）</h2>
+    <div class="reasons" id="reasons"></div>
+  </section>
+
+  <section class="panel">
+    <h2>かわいいところ（一部）（タップしてね）</h2>
+    <div class="reasons" id="cute"></div>
+  </section>
+
+  <section class="actions">
+    <button class="btn alt" id="fire">花火をあげる</button>
+    <button class="btn" id="more">風船をふやす</button>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  var cv=document.getElementById('fx'),cx=cv.getContext('2d'),parts=[],W,H;
+  function fit(){var d=window.devicePixelRatio||1;W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0)}
+  fit();addEventListener('resize',fit);
+  var cols=['#ff6f7d','#ffd23f','#5ed3a0','#4aa8ff','#b08cff','#ff9a4d','#fff'];
+  function burst(x,y,n,spd){
+    for(var i=0;i<n;i++){var a=Math.random()*6.283,s=(Math.random()*.7+.3)*spd;
+      parts.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,w:Math.random()*8+4,h:Math.random()*5+3,r:Math.random()*6,vr:(Math.random()-.5)*.4,c:cols[i%cols.length],l:1})}
+    if(!running)loop();
+  }
+  var running=false;
+  function loop(){
+    running=true;cx.clearRect(0,0,W,H);
+    parts=parts.filter(function(p){return p.l>0&&p.y<H+20});
+    parts.forEach(function(p){
+      if(p.rk){p.py=p.y;p.y+=p.vy;if(p.y<=p.ty){p.l=0;explode(p.x,p.y)}
+        cx.save();cx.globalAlpha=.9;cx.strokeStyle='#fff';cx.lineWidth=3;cx.lineCap='round';cx.beginPath();cx.moveTo(p.x,p.y+22);cx.lineTo(p.x,p.y);cx.stroke();cx.restore();return}
+      if(p.s){p.h.push(p.x,p.y);if(p.h.length>16)p.h.splice(0,2);
+        p.vx*=p.d;p.vy*=p.d;p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.l-=p.f;
+        var al=Math.max(p.l,0);if(p.l<.35&&Math.random()<.45)al*=.25;
+        cx.save();cx.globalAlpha=al;cx.strokeStyle=p.c;cx.lineWidth=2.4;cx.lineCap='round';cx.lineJoin='round';cx.beginPath();cx.moveTo(p.h[0],p.h[1]);
+        for(var k=2;k<p.h.length;k+=2)cx.lineTo(p.h[k],p.h[k+1]);
+        cx.lineTo(p.x,p.y);cx.stroke();cx.fillStyle='#fff';cx.beginPath();cx.arc(p.x,p.y,1.8,0,6.283);cx.fill();cx.restore();return}
+      p.vy+=.12;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l-=.006;
+      cx.save();cx.globalAlpha=Math.max(p.l,0);cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore();
+    });
+    if(parts.length)requestAnimationFrame(loop);else{running=false;cx.clearRect(0,0,W,H)}
+  }
+  function rocket(x,ty){parts.push({rk:1,x:x,y:H,py:H,ty:ty,vy:-(H-ty)/38,l:1});if(!running)loop()}
+  function explode(x,y){
+    var i,a,z,s,sc=Math.max(.6,Math.min(1.2,Math.min(W,H)/600));
+    for(i=0;i<140;i++){
+      a=Math.random()*6.283;z=Math.random()*2-1;s=Math.sqrt(1-z*z)*(5+Math.random()*2.5)*sc;
+      parts.push({s:1,h:[],x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,d:.955,g:.05,f:.009,c:'hsl('+Math.floor(Math.random()*360)+',100%,62%)',l:1});
+    }
+    for(i=0;i<36;i++){
+      a=Math.random()*6.283;s=Math.random()*2.2*sc;
+      parts.push({s:1,h:[],x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,d:.97,g:.06,f:.007,c:'#ffe7a8',l:1.1});
+    }
+  }
+  function rain(){for(var i=0;i<90;i++)setTimeout(function(){burst(Math.random()*W,-10,1,1)},i*25)}
+
+  // balloons
+  var bc=['#ff6f7d','#ffd23f','#5ed3a0','#4aa8ff','#b08cff','#ff9a4d'],layer=document.getElementById('balloons'),timer;
+  function balloon(){
+    var b=document.createElement('div'),s=.7+Math.random()*.7;
+    b.className='balloon';b.style.background=bc[Math.floor(Math.random()*bc.length)];
+    b.style.left=Math.random()*(W-70)+'px';b.style.width=64*s+'px';b.style.height=78*s+'px';
+    b.style.animationDuration=(9+Math.random()*8)+'s';
+    b.addEventListener('animationend',function(){b.remove()});
+    b.addEventListener('click',function(){var r=b.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,26,6);b.remove()});
+    layer.appendChild(b);
+  }
+  function balloons(n){for(var i=0;i<n;i++)setTimeout(balloon,i*180)}
+
+  // gate
+  var gate=document.getElementById('gate');
+  document.getElementById('openBtn').addEventListener('click',function(){
+    gate.classList.add('gone');
+    setTimeout(function(){burst(W/2,H/2,160,10);rain();balloons(14)},250);
+    setTimeout(function(){document.getElementById('fire').click()},700);
+    timer=setInterval(function(){if(!document.hidden&&layer.children.length<22)balloon()},1400);
+    setTimeout(function(){gate.style.display='none'},900);
+  });
+  document.getElementById('fire').addEventListener('click',function(){
+    var v=document.getElementById('veil');v.classList.add('on');clearTimeout(v.t);v.t=setTimeout(function(){v.classList.remove('on')},6*450+3800);
+    for(var i=0;i<6;i++)setTimeout(function(){
+      var x=W*(.15+Math.random()*.7),y=H*(.15+Math.random()*.35);
+      rocket(x,y);
+    },i*450);
+  });
+  document.getElementById('more').addEventListener('click',function(){balloons(10)});
+
+  // reasons
+  var hidden='？';
+  function grid(id,rs){var wrap=document.getElementById(id);
+  rs.forEach(function(r){
+    var b=document.createElement('button');b.className='reason';b.textContent=hidden;
+    b.addEventListener('click',function(){
+      var open=b.textContent!==hidden;b.textContent=open?hidden:r;b.classList.remove('on');void b.offsetWidth;b.classList.add('on');
+      if(!open){var q=b.getBoundingClientRect();burst(q.left+q.width/2,q.top+q.height/2,24,5)}
+    });
+    wrap.appendChild(b);
+  });}
+  grid('reasons',['ゲームを本気で楽しんでいるところ','ポジティブなところ','いっぱい笑うところ','声や話している雰囲気']);
+  grid('cute',['眠くなってるとき','テンションあがってるとき','負けず嫌いが出てるとき','ほかの人にマウントとってるとき']);
+
+  // settings & counter
+  var n1={value:'まさ'},n2={value:'なな'},dt={value:''};
+  var d0=new Date();d0.setFullYear(d0.getFullYear()-1);
+  function iso(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+  dt.value=iso(d0);
+  function since(y,m,d){var n=new Date();return Math.floor((Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())-Date.UTC(y,m-1,d))/864e5)}
+  var dDate=since(2025,11,24),dMeet=since(2025,9,21),cnt2=document.getElementById('dayCount2'),cnt=document.getElementById('dayCount'),nm=document.getElementById('names'),shown=0,anim;
+  function update(){
+    nm.textContent=n1.value+' ♡ '+n2.value;
+    var t=new Date(dt.value+'T00:00:00'),days=430;
+    cancelAnimationFrame(anim);var st=performance.now();
+    (function step(now){var k=Math.min((now-st)/1200,1);var e=1-Math.pow(1-k,3);cnt.textContent=Math.round(dMeet*e);cnt2.textContent=Math.round(dDate*e);if(k<1)anim=requestAnimationFrame(step)})(st);
+  }
+  update();
+})();
+</script>
+</body>
+</html>
